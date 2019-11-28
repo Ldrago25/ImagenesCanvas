@@ -13,15 +13,35 @@ var fondo = {
     CargaOK: false
 };
 
+var cerdo = {
+    url: "cerdo.png",
+    CargaOK: false
+};
+
+var pollo = {
+    url: "pollo.png",
+    CargaOK: false
+};
+
+//creando objetos de las imagenes 
 fondo.objeto = new Image();
 fondo.objeto.src = fondo.url;
 fondo.objeto.addEventListener("load", cargarfondo);
 
-//creando objetos de las imagenes 
+
 vaca.objeto = new Image();
 vaca.objeto.src = vaca.url;
 vaca.objeto.addEventListener("load", cargarvaca);
 
+cerdo.objeto = new Image();
+cerdo.objeto.src = cerdo.url;
+cerdo.objeto.addEventListener("load", cargarcerdo);
+
+pollo.objeto = new Image();
+pollo.objeto.src = pollo.url;
+pollo.objeto.addEventListener("load", cargarpollo);
+
+//creando sus funciones
 function cargarfondo() {
     fondo.CargaOK = true;
     dibujar();
@@ -32,8 +52,20 @@ function cargarvaca() {
     dibujar();
 }
 
+function cargarcerdo() {
+    cerdo.CargaOK = true;
+    dibujar();
+}
+
+function cargarpollo() {
+    pollo.CargaOK = true;
+    dibujar();
+}
+
 var ite = 0;
-cantidad = aleatorios(1, 25);
+var cantidad_vacas = aleatorios(1, 5);
+var cantidad_cerdo = aleatorios(1, 5);
+var cantidad_pollo = aleatorios(1, 5);
 
 function dibujar() {
     if (fondo.CargaOK) {
@@ -41,36 +73,38 @@ function dibujar() {
     }
     if (vaca.CargaOK) {
 
-        console.log("Candidad de vacas: " + parseInt(cantidad));
-        while (true) {
-            if (ite == cantidad) break;
+        console.log("Candidad de vacas: " + parseInt(cantidad_vacas));
+        for (var i = 0; i < cantidad_vacas; i++) {
             var x = aleatorios(0, 4);
             var y = aleatorios(0, 4);
             var x = x * 80;
             var y = y * 80;
             lienzo.drawImage(vaca.objeto, x, y);
-            ite++;
 
         }
+    }
 
+    if (cerdo.CargaOK) {
+        for (var i = 0; i < cantidad_cerdo; i++) {
+            var x = aleatorios(0, 4);
+            var y = aleatorios(0, 4);
+            var x = x * 80;
+            var y = y * 80;
+            lienzo.drawImage(cerdo.objeto, x, y);
+        }
+    }
+
+    if (pollo.CargaOK) {
+        for (var i = 0; i < cantidad_pollo; i++) {
+            var x = aleatorios(0, 4);
+            var y = aleatorios(0, 4);
+            var x = x * 80;
+            var y = y * 80;
+            lienzo.drawImage(pollo.objeto, x, y);
+        }
     }
 
 }
-
-
-
-
-
-
-
-/*var cedo = new Image();
-cerdo.src = "cerdo.png";
-cerdo.addEventListener("load", dibujarcerdo);
-
-var pollo = new Image();
-pollo.src = "pollo.png";
-pollo.addEventListener("load", dibujarpollo);*/
-
 
 
 
@@ -79,13 +113,4 @@ function aleatorios(min, max) {
     var alea;
     alea = Math.floor(Math.random() * (max - min + 1)) + min;
     return alea;
-}
-
-
-document.write("\n");
-for (var i = 0; i < 10; i++) {
-    var a = aleatorios(1, 100);
-    console.log(a);
-    if (a != 9)
-        document.write(a + " ");
 }
